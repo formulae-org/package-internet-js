@@ -1,0 +1,10 @@
+{
+	"pathInternet": "Internet",
+
+	"nameUniformResourceLocator": "Localizador uniforme de recursos de Internet",
+	"leafUniformResourceLocator": "URL",
+
+	"actionEditLink"  : "Editar enlace...",
+	"actionOpenLink"  : "Abrir enlace en nueva pestaña",
+	"actionCopyLink"  : "Copiar dirección del enlace"
+}

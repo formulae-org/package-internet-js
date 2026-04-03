@@ -1,10 +1,10 @@
 {
 	"pathInternet": "Internet",
 
-	"nameUniformResourceLocator": "Internet uniform resource locator",
-	"leafUniformResourceLocator": "URL",
+	"nameHyperlink": "Hyperlink",
+	"leafHyperlink": "Hyperlink",
 
-	"actionEditLink"  : "Edit link...",
-	"actionOpenLink"  : "Open link in new tab",
-	"actionCopyLink"  : "Copy link address"
+	"actionEditHyperlink" : "Edit link...",
+	"actionOpenHyperlink" : "Open link in new tab",
+	"actionCopyHyperlink" : "Copy link address"
 }

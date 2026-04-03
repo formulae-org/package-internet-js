@@ -20,8 +20,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 export class InternetPackage extends Formulae.Package {}
 
-InternetPackage.createURLForm = function(value, description, f) {
-	if (InternetPackage.urlForm === undefined) {
+InternetPackage.createHyperlinkForm = function(value, description, f) {
+	if (InternetPackage.hyperlinkForm === undefined) {
 		let table = document.createElement("table");
 		table.classList.add("bordered");
 		table.innerHTML =
@@ -38,10 +38,10 @@ InternetPackage.createURLForm = function(value, description, f) {
 <th colspan=2><button>Ok</button>
 `;
 
-		InternetPackage.urlForm = table;
+		InternetPackage.hyperlinkForm = table;
 	}
 
-	let rows = InternetPackage.urlForm.rows;
+	let rows = InternetPackage.hyperlinkForm.rows;
 	let v  = rows[1].cells[1].firstChild;
 	let d  = rows[2].cells[1].firstChild;
 	let ok = rows[3].cells[0].firstChild;
@@ -55,15 +55,15 @@ InternetPackage.createURLForm = function(value, description, f) {
 	};
 
 	Formulae.modalContent.removeChild(Formulae.modalContent.childNodes[0]);
-	Formulae.modalContent.appendChild(InternetPackage.urlForm);
+	Formulae.modalContent.appendChild(InternetPackage.hyperlinkForm);
 
 	Formulae.modal.style.display = "block";
 	Formulae.modal.focus();
 };
 
-InternetPackage.editionURL = function() {
-	InternetPackage.createURLForm(null, null, (v, d) => {
-		let newExpression = Formulae.createExpression("Internet.UniformResourceLocator");
+InternetPackage.editionHyperlink = function() {
+	InternetPackage.createHyperlinkForm(null, null, (v, d) => {
+		let newExpression = Formulae.createExpression("Internet.Hyperlink");
 		newExpression.set("Value", v);
 		newExpression.set("Description", d);
 
@@ -74,26 +74,26 @@ InternetPackage.editionURL = function() {
 	});
 }
 
-InternetPackage.actionJumpURL = {
+InternetPackage.actionJumpHyperlink = {
 	isAvailableNow: () => true,
-	getDescription: () => InternetPackage.messages.actionOpenLink,
+	getDescription: () => InternetPackage.messages.actionOpenHyperlink,
 	doAction: () => {
 		let win = window.open(Formulae.sExpression.get("Value"), "_blank");
 		win.focus();
 	}
 };
 
-InternetPackage.actionCopyURL = {
+InternetPackage.actionCopyHyperlink = {
 	isAvailableNow: () => true,
-	getDescription: () => InternetPackage.messages.actionCopyLink,
+	getDescription: () => InternetPackage.messages.actionCopyHyperlink,
 	doAction: () => navigator.clipboard.writeText(Formulae.sExpression.get("Value"))
 };
 
-InternetPackage.actionEditURL = {
+InternetPackage.actionEditHyperlink = {
 	isAvailableNow: () => Formulae.sHandler.type != Formulae.ROW_OUTPUT,
-	getDescription: () => InternetPackage.messages.actionEditLink,
+	getDescription: () => InternetPackage.messages.actionEditHyperlink,
 	doAction: () => {
-		InternetPackage.createURLForm(Formulae.sExpression.get("Value"), Formulae.sExpression.get("Description"), (v, d) => {
+		InternetPackage.createHyperlinkForm(Formulae.sExpression.get("Value"), Formulae.sExpression.get("Description"), (v, d) => {
 			Formulae.sExpression.set("Value", v);
 			Formulae.sExpression.set("Description", d);
 
@@ -105,11 +105,11 @@ InternetPackage.actionEditURL = {
 };
 
 InternetPackage.setEditions = function() {
-	Formulae.addEdition(this.messages.pathInternet, null, this.messages.leafUniformResourceLocator, InternetPackage.editionURL);
+	Formulae.addEdition(this.messages.pathInternet, null, this.messages.leafHyperlink, InternetPackage.editionHyperlink);
 };
 
 InternetPackage.setActions = function() {
-	Formulae.addAction("Internet.UniformResourceLocator", InternetPackage.actionJumpURL);
-	Formulae.addAction("Internet.UniformResourceLocator", InternetPackage.actionCopyURL);
-	Formulae.addAction("Internet.UniformResourceLocator", InternetPackage.actionEditURL);
+	Formulae.addAction("Internet.Hyperlink", InternetPackage.actionJumpHyperlink);
+	Formulae.addAction("Internet.Hyperlink", InternetPackage.actionCopyHyperlink);
+	Formulae.addAction("Internet.Hyperlink", InternetPackage.actionEditHyperlink);
 };

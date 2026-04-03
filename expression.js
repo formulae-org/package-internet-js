@@ -20,9 +20,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 export class InternetPackage extends Formulae.Package {}
 
-InternetPackage.URL = class extends Expression.NullaryExpression {
-	getTag() { return "Internet.UniformResourceLocator"; }
-	getName() { return InternetPackage.messages.nameUniformResourceLocator; }
+InternetPackage.Hyperlink = class extends Expression.NullaryExpression {
+	getTag() { return "Internet.Hyperlink"; }
+	getName() { return InternetPackage.messages.nameHyperlink; }
 
 	set(name, value) {
 		switch (name) {
@@ -71,5 +71,6 @@ InternetPackage.URL = class extends Expression.NullaryExpression {
 }
 
 InternetPackage.setExpressions = function(module) {
-	Formulae.setExpression(module, "Internet.UniformResourceLocator", InternetPackage.URL);
+	Formulae.setExpression(module, "Internet.Hyperlink", InternetPackage.Hyperlink);
 };
+

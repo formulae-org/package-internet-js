@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-'use strict';
+"use strict";
 
 export class InternetPackage extends Formulae.Package {}
 
@@ -40,23 +40,23 @@ InternetPackage.createHyperlinkForm = function(value, description, f) {
 
 		InternetPackage.hyperlinkForm = table;
 	}
-
+	
 	let rows = InternetPackage.hyperlinkForm.rows;
 	let v  = rows[1].cells[1].firstChild;
 	let d  = rows[2].cells[1].firstChild;
 	let ok = rows[3].cells[0].firstChild;
-
+	
 	v.value = value;
 	d.value = description;
-
+	
 	ok.onclick = () => {
 		Formulae.modal.style.display = "none";
 		f(v.value, d.value);
 	};
-
+	
 	Formulae.modalContent.removeChild(Formulae.modalContent.childNodes[0]);
 	Formulae.modalContent.appendChild(InternetPackage.hyperlinkForm);
-
+	
 	Formulae.modal.style.display = "block";
 	Formulae.modal.focus();
 };
@@ -66,7 +66,7 @@ InternetPackage.editionHyperlink = function() {
 		let newExpression = Formulae.createExpression("Internet.Hyperlink");
 		newExpression.set("Value", v);
 		newExpression.set("Description", d);
-
+		
 		Formulae.sExpression.replaceBy(newExpression);
 		Formulae.sHandler.prepareDisplay();
 		Formulae.sHandler.display();
@@ -96,7 +96,7 @@ InternetPackage.actionEditHyperlink = {
 		InternetPackage.createHyperlinkForm(Formulae.sExpression.get("Value"), Formulae.sExpression.get("Description"), (v, d) => {
 			Formulae.sExpression.set("Value", v);
 			Formulae.sExpression.set("Description", d);
-
+			
 			Formulae.sHandler.prepareDisplay();
 			Formulae.sHandler.display();
 			Formulae.setSelected(Formulae.sHandler, Formulae.sExpression, false);

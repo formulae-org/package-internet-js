@@ -16,52 +16,52 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-'use strict';
+"use strict";
 
 export class InternetPackage extends Formulae.Package {}
 
 InternetPackage.Hyperlink = class extends Expression.NullaryExpression {
 	getTag() { return "Internet.Hyperlink"; }
 	getName() { return InternetPackage.messages.nameHyperlink; }
-
+	
 	set(name, value) {
 		switch (name) {
 			case "Value"      : this.url         = value; return;
 			case "Description": this.description = value; return;
 		}
-
+		
 		super.set(name, value);
 	}
-
+	
 	get(name) {
 		switch (name) {
 			case "Value"      : return this.url;
 			case "Description": return this.description;
 		}
-
+		
 		super.get(name);
 	}
-
+	
 	getSerializationNames() {
 		return [ "Value", "Description" ];
 	}
-
+	
 	async getSerializationStrings() {
 		return [ this.url, this.description ];
 	}
-
+	
 	setSerializationStrings(strings, promises) {
 		this.set("Value",       strings[0]);
 		this.set("Description", strings[1]);
 	}
-
+	
 	prepareDisplay(context) {
 		this.width = Math.round(context.measureText(this.description).width);
 		this.height = context.fontInfo.size;
 		this.horzBaseline = Math.round(this.height / 2);
 		this.vertBaseline = Math.round(this.width / 2);
 	}
-
+	
 	display(context, x, y) {
 		let bkpFillStyle = context.fillStyle;
 		context.fillStyle = "green";

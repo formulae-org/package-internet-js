@@ -105,7 +105,8 @@ InternetPackage.actionEditHyperlink = {
 };
 
 InternetPackage.setEditions = function() {
-	Formulae.addEdition(this.messages.pathInternet, null, this.messages.leafHyperlink, InternetPackage.editionHyperlink);
+	// Hyperlink creation — URL/description are prompted, so (like the arithmetic Number entry) it is labeled with plain text
+	Formulae.addEdition(this.messages.pathInternet, this.messages.leafHyperlink, this.messages.leafHyperlink, InternetPackage.editionHyperlink);
 };
 
 InternetPackage.setActions = function() {
